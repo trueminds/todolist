@@ -2,7 +2,8 @@
   <div>
     <ul>
       <li v-for="todoItem in todoItems" v-bind:key = "todoItem"></li>
-    </ul>
+      <li>박하원짱</li>
+ </ul>
   </div>
 </template>
 
