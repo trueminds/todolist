@@ -31,6 +31,8 @@ export default {
     toggleComplete: function(todoItem,index) {
       // eslint-disable-next-line no-console
       todoItem.completed =!todoItem.completed;
+      localStorage.removeItem(todoItem.item);
+      localStorage.setItem(todoItem.item,JSON.stringify(todoItem))
   }
   },
   created: function(){
