@@ -36,25 +36,29 @@ export default {
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem.item,JSON.stringify(todoItem))
     },
- created: function(){
-    if(localStorage.length > 0) {
-      for (var i=0; i< localStorage.length; i++){
-        if(localStorage.key(i) !=='loglevel:webpack-dev-server'){
-          // eslint-disable-next-line no-console
-          console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
-          this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i)))); 
-        }
-        
-      }
+    clearAllItems: function(){
+      localStorage.clear();
+      this.todoItems = []
     }
   },
+  created: function(){
+      if(localStorage.length > 0) {
+        for (var i=0; i< localStorage.length; i++){
+          if(localStorage.key(i) !=='loglevel:webpack-dev-server'){
+            // // eslint-disable-next-line no-console
+            // console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
+            this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i)))); 
+          }
+      }
+     }
+    },
   components: {
     TodoHeader: TodoHeader,
     TodoInput: TodoInput,
     TodoList: TodoList,
     TodoFooter: TodoFooter
-  }
-};
+  },
+}
 </script>
 <style>
 body {

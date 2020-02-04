@@ -3,16 +3,28 @@
     <input type="text" v-model="newTodoItem" v-on:keyup.enter="addTodo">
     <!-- <button v-on:click="addTodo">add</button> -->
     <span class="addContainer" v-on:click="addTodo">
-      <i class="fas fa-plus addBtn"></i>
+      <i class="fas fa-plus addBtn" ></i>
     </span>
+
+     <Modal v-if="showModal" @close="showModal = false">
+        
+        <h3 slot="header">
+          Warning!
+          <i class="closeModalBtn fas fa-times" @click="showModal = false"></i>
+        </h3>
+        <div slot="body">No item typed.</div>
+        <!-- <div slot="footer">copyright</div> -->
+     </Modal>
   </div>
 </template>
 
 <script>
+import Modal from './common/Modal.vue';
 export default {
     data: function() {
         return{
-            newTodoItem: ""
+            newTodoItem: "",
+            showModal:false
         }
     },
   
@@ -25,13 +37,16 @@ export default {
            this.$emit('addTodoItem',this.newTodoItem)
            this.clearInput();
          } else{
-           alert('Nothing')
+           this.showModal =!this.showModal
          }
       },
       clearInput: function() {
          this.newTodoItem = ''
       }
-    }
+    },
+    components: {
+      Modal:Modal
+    },
 };
 </script>
 
@@ -59,6 +74,9 @@ input:focus {
 .addBtn {
   color: white;
   vertical-align: middle;
+}
+.closeModalBtn {
+  columns: #42b983;
 }
 
 </style>
